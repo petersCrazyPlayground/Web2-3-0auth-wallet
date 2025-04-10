@@ -1,7 +1,7 @@
 import { ethers } from 'ethers';
 import { IBridge, TransactionStatus, Transaction, BridgeError, IValidator, IAssetManager } from '../../types';
 
-export class AvalancheSolanaBridge implements IBridge {
+export class AvalancheRoninBridge implements IBridge {
     private provider: ethers.Provider;
     private signer: ethers.Signer;
     private address: Promise<string>;
@@ -15,10 +15,10 @@ export class AvalancheSolanaBridge implements IBridge {
         minAmount: string;
         maxAmount: string;
         dailyLimit: string;
-        solanaToken: string;
+        roninToken: string;
     }> = new Map();
     private isBridgeInitialized: boolean = false;
-    private bridgeId: string = 'avalanche-solana-bridge';
+    private bridgeId: string = 'avalanche-ronin-bridge';
     private isPaused: boolean = false;
 
     constructor(
@@ -49,7 +49,7 @@ export class AvalancheSolanaBridge implements IBridge {
             // Add default supported tokens
             this.addSupportedToken(
                 '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E', // USDC on Avalanche
-                'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', // USDC on Solana
+                '0x0b7007c13325c48911f73a2dad5fa5dcbf808adc', // USDC on Ronin
                 '1000000', // 1 USDC minimum
                 '1000000000', // 1000 USDC maximum
                 '10000000000' // 10000 USDC daily limit
@@ -57,7 +57,7 @@ export class AvalancheSolanaBridge implements IBridge {
 
             this.addSupportedToken(
                 '0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7', // USDT on Avalanche
-                'Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB', // USDT on Solana
+                '0x1f6faeb8d8b8c5d1c39d696fd3d9e8e8760e7b2c', // USDT on Ronin
                 '1000000', // 1 USDT minimum
                 '1000000000', // 1000 USDT maximum
                 '10000000000' // 10000 USDT daily limit
@@ -65,7 +65,7 @@ export class AvalancheSolanaBridge implements IBridge {
 
             this.addSupportedToken(
                 '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599', // WBTC on Avalanche
-                '9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E', // WBTC on Solana
+                '0x0b7007c13325c48911f73a2dad5fa5dcbf808adc', // WBTC on Ronin
                 '100000', // 0.001 BTC minimum
                 '100000000', // 1 BTC maximum
                 '1000000000' // 10 BTC daily limit
@@ -293,7 +293,7 @@ export class AvalancheSolanaBridge implements IBridge {
 
     private addSupportedToken(
         avalancheToken: string,
-        solanaToken: string,
+        roninToken: string,
         minAmount: string,
         maxAmount: string,
         dailyLimit: string
@@ -303,7 +303,7 @@ export class AvalancheSolanaBridge implements IBridge {
             minAmount,
             maxAmount,
             dailyLimit,
-            solanaToken
+            roninToken
         });
     }
-}
+} 
